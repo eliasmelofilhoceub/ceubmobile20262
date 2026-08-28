@@ -1,43 +1,56 @@
 import { Component } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, Button} from 'react-native';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      nome: '',
+      input: ''
+    };
+    this.entradaNome = this.entradaNome.bind(this);
+  }
+
+  entradaNome(texto) {
+    if(texto.length > 0) {
+      this.setState({nome: 'Obrigado por acessar e inserir seus dados : ' + texto});
+    } else {
+      this.setState({nome: ''})
+    }
+  }
+
   render() {
     return(
-      <View>
-      <Text style={{color: '#D93514', fontSize: 20}}>Introdução de Aplicação com imagem</Text>
-      <Text>Aplicação</Text>
-      <Image source={{uri: 'https://inovaveterinaria.com.br/wp-content/uploads/2015/04/gato-sem-raca-INOVA-scaled.jpg'}} 
-      style={{width: 300, height: 200, alignItems: 'center'}}
-      >
-      </Image>
+      <View style={styles.container}>
+        <TextInput
+        style={styles.input}
+        placeholder="Digite seu nome:"
+        underlineColorAndroid="transparent"
+        onChangeText={this.entradaNome}
+        />
 
-      <Imagem1 largura={200} altura={300}> </Imagem1>
+        <Text style={styles.texto}>{this.state.nome}</Text>
       </View>
     );
   }
 }
-
-class Imagem1 extends Component {
-  render() {
-    let img = 'https://chemitec.com.br/wp-content/uploads/2025/04/como-cuidar-de-gatos-filhotes.jpg';
-
-    return(
-      <View>
-        <Image source={{uri: img}} 
-        style={{width: this.props.largura, height: this.props.altura}}>
-        </Image>
-      </View>
-    );
-  }
-}
-export default App;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2fdb1f',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#c6d6c5',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: 'red',
+    margin: 14,
+    fontSize: 15,
+    padding: 8,
+  },
+  texto: {
+    fontSize: 15,
+    textAlign: 'center',
   },
 });
+
+export default App;
