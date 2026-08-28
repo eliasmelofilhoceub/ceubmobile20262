@@ -11,12 +11,12 @@ class App extends Component {
     this.entradaNome = this.entradaNome.bind(this);
   }
 
-  entradaNome(texto) {
-    if(texto.length > 0) {
-      this.setState({nome: 'Obrigado por acessar e inserir seus dados : ' + texto});
-    } else {
-      this.setState({nome: ''})
+  entradaNome() {
+    if(this.state.input === '') {
+      alert('Digite seu nome: ');
+      return;
     }
+    this.setState({nome: 'Seja bem vindo a aplicação: '  + this.state.input})
   }
 
   render() {
@@ -26,9 +26,9 @@ class App extends Component {
         style={styles.input}
         placeholder="Digite seu nome:"
         underlineColorAndroid="transparent"
-        onChangeText={this.entradaNome}
+        onChangeText={(texto) => this.setState({input: texto})}
         />
-
+        <Button title='Login' onPress={this.entradaNome}></Button>
         <Text style={styles.texto}>{this.state.nome}</Text>
       </View>
     );
