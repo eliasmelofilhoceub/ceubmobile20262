@@ -1,43 +1,56 @@
-import { Component } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import React, { Component } from "react";
+import { View, Text, StyleSheet, FlatList} from 'react-native';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          feed: [
+            {id: '1', nome: 'João', idade: '20'},
+            {id: '2', nome: 'Maria', idade: '30'},
+            {id: '3', nome: 'Ana', idade: '40'},
+            {id: '4', nome: 'Clara', idade: '50'},
+          ]
+        };
+    }
   render() {
     return(
-      <View>
-      <Text style={{color: '#D93514', fontSize: 20}}>Introdução de Aplicação com imagem</Text>
-      <Text>Aplicação</Text>
-      <Image source={{uri: 'https://inovaveterinaria.com.br/wp-content/uploads/2015/04/gato-sem-raca-INOVA-scaled.jpg'}} 
-      style={{width: 300, height: 200, alignItems: 'center'}}
-      >
-      </Image>
-
-      <Imagem1 largura={200} altura={300}> </Imagem1>
-      </View>
+      <View style={styles.container}>
+        <FlatList
+          data={this.state.feed}
+          keyExtractor={(item) => item.id}
+          renderItem={({item}) => <Person data={item}/>}
+        />
+      </View>     
     );
   }
 }
-
-class Imagem1 extends Component {
-  render() {
-    let img = 'https://chemitec.com.br/wp-content/uploads/2025/04/como-cuidar-de-gatos-filhotes.jpg';
-
-    return(
-      <View>
-        <Image source={{uri: img}} 
-        style={{width: this.props.largura, height: this.props.altura}}>
-        </Image>
-      </View>
-    );
-  }
-}
-export default App;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#2fdb1f',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    container: {
+      flex: 1,
+    },
+    areaPessoa: {
+      backgroundColor: 'yellow',
+      height: 100,
+      marginBottom: 15,
+    },
+    textoPessoa: {
+      color: 'red',
+      fontSize: 18,
+    },
+}); 
+
+export default App;
+
+class Person extends Component{
+  render(){
+    return(
+      <View style={styles.areaPessoa}>
+        <Text style={styles.textoPessoa}>Nome: {this.props.nome}</Text>
+        <Text style={styles.textoPessoa}>Idade: {this.props.idade}</Text>
+      </View>
+    );
+  }
+}
+
