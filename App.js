@@ -1,43 +1,44 @@
-import { Component } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import React from "react";
+import {NavigationContainer} from "@react-navigation/native";
+import {createBottomTabNavigation} from "@react-navigation/bottom-tabs";
 
-class App extends Component {
-  render() {
-    return(
-      <View>
-      <Text style={{color: '#D93514', fontSize: 20}}>Introdução de Aplicação com imagem</Text>
-      <Text>Aplicação</Text>
-      <Image source={{uri: 'https://inovaveterinaria.com.br/wp-content/uploads/2015/04/gato-sem-raca-INOVA-scaled.jpg'}} 
-      style={{width: 300, height: 200, alignItems: 'center'}}
-      >
-      </Image>
 
-      <Imagem1 largura={200} altura={300}> </Imagem1>
-      </View>
-    );
-  }
+import Home from "./src/Home";
+import Sobre from "./src/Sobre";
+import Contato from "./src/Contato";
+
+const Tab = createBottomTabNavigation();
+
+export default function App () { 
+  return(
+      <NavigationContainer>
+        <Tab.Navigation
+        screenOptions={{
+          headerShown: false,
+          tabBarHideOnKeyboard: true,
+          tabBarShowLabel: false,
+        }}
+      
+        >
+        <Tab.Screen
+        name="Home"
+        component={Home}
+        />
+
+        <Tab.Screen
+        name="Sobre"
+        component={Sobre}
+        />
+
+        <Tab.Screen
+        name="Contato"
+        component={Contato}
+        />
+
+      </Tab.Navigation>
+      </NavigationContainer>
+  );
 }
 
-class Imagem1 extends Component {
-  render() {
-    let img = 'https://chemitec.com.br/wp-content/uploads/2025/04/como-cuidar-de-gatos-filhotes.jpg';
 
-    return(
-      <View>
-        <Image source={{uri: img}} 
-        style={{width: this.props.largura, height: this.props.altura}}>
-        </Image>
-      </View>
-    );
-  }
-}
-export default App;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#2fdb1f',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
