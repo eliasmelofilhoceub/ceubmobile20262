@@ -1,43 +1,43 @@
-import { Component } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import React, {useState} from "react";
+import {View, Text, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-class App extends Component {
-  render() {
-    return(
-      <View>
-      <Text style={{color: '#D93514', fontSize: 20}}>Introdução de Aplicação com imagem</Text>
-      <Text>Aplicação</Text>
-      <Image source={{uri: 'https://inovaveterinaria.com.br/wp-content/uploads/2015/04/gato-sem-raca-INOVA-scaled.jpg'}} 
-      style={{width: 300, height: 200, alignItems: 'center'}}
-      >
-      </Image>
+export default function App() {
+    
+    const [nome, setNome] = useState("Nome XY");
+    const [input, setInput] = useState('');
 
-      <Imagem1 largura={200} altura={300}> </Imagem1>
-      </View>
-    );
-  }
+    function alteracaoNome() {
+      setNome(input);
+      setInput('');
+    }
+  
+      return(
+          <View style={sytles.container}>
+            <TextInput
+            placeholder="Digite seu nome: "
+            value={input}
+            onChangeText={(texto) => setInput(texto)}
+            />
+
+            <TouchableOpacity onPress={alteracaoNome}>
+          <Text style={{color: 'red', fontSize: 20}}>Altere o nome</Text>
+            </TouchableOpacity>
+
+            <Text style={{color: 'yellow', fontSize: 25}}>{nome}</Text>
+          </View>
+      );
 }
-
-class Imagem1 extends Component {
-  render() {
-    let img = 'https://chemitec.com.br/wp-content/uploads/2025/04/como-cuidar-de-gatos-filhotes.jpg';
-
-    return(
-      <View>
-        <Image source={{uri: img}} 
-        style={{width: this.props.largura, height: this.props.altura}}>
-        </Image>
-      </View>
-    );
-  }
-}
-export default App;
-
-const styles = StyleSheet.create({
+  
+const sytles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2fdb1f',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#DDD',
   },
+
 });
+
+
+
